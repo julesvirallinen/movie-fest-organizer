@@ -13,3 +13,17 @@ model Post {
   date    DateTime @default(now())
   content String
 }
+
+model User {
+  id       String          @id @default(auto()) @map("_id") @db.ObjectId
+  username String          @unique
+  movies   MovieInterest[]
+}
+
+model MovieInterest {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId        String   @db.ObjectId
+  movie         String
+  possibleTimes String[]
+  User          User     @relation(fields: [userId], references: [id])
+}

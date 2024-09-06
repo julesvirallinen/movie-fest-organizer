@@ -17,6 +17,10 @@ def scrape_events(url):
 
     # Loop through each event item and extract relevant data
     for event in events:
+        
+        if event["data-title"] == "Ilmoitetaan myöhemmin":
+            continue
+        
         start_time_text = event.find('div', class_='start-time').text.strip()
         
         # Split start_time_text to extract start and end time
@@ -54,4 +58,4 @@ def save_to_file(data, filename):
 # Example usage
 url = 'https://hiff.fi/rakkautta-anarkiaa/aikataulu/'  # Replace with the actual URL
 events_data = scrape_events(url)
-save_to_file(events_data, 'data/events_data.json')
+save_to_file(events_data, 'public/events_data.json')
